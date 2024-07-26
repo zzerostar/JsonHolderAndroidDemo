@@ -30,7 +30,7 @@
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@android:drawable/ic_menu_myplaces" />
+                    android:src="@drawable/icon_name" />
 
                 <TextView
                     android:id="@+id/tv_name"
@@ -55,7 +55,7 @@
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@android:drawable/ic_dialog_email" />
+                    android:src="@drawable/icon_email" />
 
                 <TextView
                     android:id="@+id/tv_email"
@@ -79,7 +79,7 @@
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@android:drawable/ic_menu_call" />
+                    android:src="@drawable/icon_phone" />
 
                 <TextView
                     android:id="@+id/tv_phone"
@@ -103,7 +103,7 @@
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@android:drawable/ic_dialog_map" />
+                    android:src="@drawable/icon_address" />
 
                 <TextView
                     android:id="@+id/tv_location"
@@ -127,7 +127,7 @@
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@android:drawable/ic_dialog_info" />
+                    android:src="@drawable/icon_company" />
 
                 <TextView
                     android:id="@+id/tv_company"

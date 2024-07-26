@@ -33,6 +33,7 @@ import com.ziano.jsonholderandroid.compose.base.ViewStatus
 import com.ziano.jsonholderandroid.common.data.model.Comment
 import com.ziano.jsonholderandroid.common.data.model.Post
 import com.ziano.jsonholderandroid.compose.vm.PostDetailViewModel
+import com.ziano.jsonholderandroid.compose.widget.CustomFullScreenLoading
 import com.ziano.jsonholderandroid.ui.theme.LightGray
 import com.ziano.jsonholderandroid.compose.widget.CustomLoading
 import kotlin.math.roundToInt
@@ -50,9 +51,7 @@ fun PostDetailScreen(postDetailViewModel: PostDetailViewModel) {
 
     Scaffold {
         when (state.status) {
-            ViewStatus.loading -> Box(modifier = Modifier.fillMaxSize()) {
-                CustomLoading(Modifier.align(Alignment.Center), size = 50.dp)
-            }
+            ViewStatus.loading -> CustomFullScreenLoading()
 
             ViewStatus.success -> Content(state.detail!!, state.comments)
             ViewStatus.error -> Text("error")

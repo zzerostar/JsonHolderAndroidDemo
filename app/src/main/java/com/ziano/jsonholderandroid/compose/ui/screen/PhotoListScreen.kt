@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
 import com.ziano.jsonholderandroid.compose.base.ViewStatus
 import com.ziano.jsonholderandroid.compose.vm.PhotoListViewModel
+import com.ziano.jsonholderandroid.compose.widget.CustomFullScreenLoading
 import com.ziano.jsonholderandroid.compose.widget.CustomLoading
 
 /**
@@ -34,9 +35,7 @@ fun PhotoListScreen(viewModel: PhotoListViewModel) {
 
     when (state.status) {
         ViewStatus.loading -> {
-            Box(modifier = Modifier.fillMaxSize()) {
-                CustomLoading(Modifier.align(Alignment.Center), size = 50.dp)
-            }
+            CustomFullScreenLoading()
         }
 
         ViewStatus.success -> LazyVerticalGrid(columns = GridCells.Fixed(2), state = lazyGridState) {
