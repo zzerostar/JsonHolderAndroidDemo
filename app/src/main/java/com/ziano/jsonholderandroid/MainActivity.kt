@@ -14,7 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.ziano.jsonholderandroid.jsonholder.presentation.screen.navigation.navigateToJsonHolderGroup
+import com.ziano.jsonholderandroid.compose.JsonHolderAndroidNavGraph
+import com.ziano.jsonholderandroid.compose.ui.screen.navigation.navigateToJsonHolderGroup
 import com.ziano.jsonholderandroid.ui.theme.JsonHolderAndroidTheme
 import dagger.hilt.android.AndroidEntryPoint
 
