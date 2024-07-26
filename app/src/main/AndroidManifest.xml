@@ -28,6 +28,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.ziano.kotlinandroid.jsonholder.ui.JsonHolderMainActivity"/>
+        <activity android:name="com.ziano.kotlinandroid.jsonholder.ui.PostDetailActivity"/>
+
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.ziano.jsonholderandroid.common.di
 import com.ziano.jsonholderandroid.common.data.RetrofitManager
 import com.ziano.jsonholderandroid.common.data.api.PhotoService
 import com.ziano.jsonholderandroid.common.data.api.PostService
+import com.ziano.jsonholderandroid.common.data.api.UserService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,5 +30,11 @@ class APIModule {
     @Singleton
     fun providePhotoService(): PhotoService {
         return RetrofitManager.get().create(PhotoService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserService(): UserService {
+        return RetrofitManager.get().create(UserService::class.java)
     }
 }

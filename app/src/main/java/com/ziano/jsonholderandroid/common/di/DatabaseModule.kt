@@ -5,6 +5,7 @@ import com.ziano.jsonholderandroid.common.data.local.JsonHolderDatabase
 import com.ziano.jsonholderandroid.common.data.local.dao.CommentDao
 import com.ziano.jsonholderandroid.common.data.local.dao.PhotoDao
 import com.ziano.jsonholderandroid.common.data.local.dao.PostDao
+import com.ziano.jsonholderandroid.common.data.local.dao.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,7 +39,7 @@ class DatabaseModule {
     @Provides
     fun getPhotoDao(jsonHolderDatabase: JsonHolderDatabase): PhotoDao = jsonHolderDatabase.getPhotoDao()
 
-//    @Singleton
-//    @Provides
-//    fun getUserDao(jsonHolderDatabase: JsonHolderDatabase) : UserDao = jsonHolderDatabase.getUserDao()
+    @Singleton
+    @Provides
+    fun getUserDao(jsonHolderDatabase: JsonHolderDatabase) : UserDao = jsonHolderDatabase.getUserDao()
 }

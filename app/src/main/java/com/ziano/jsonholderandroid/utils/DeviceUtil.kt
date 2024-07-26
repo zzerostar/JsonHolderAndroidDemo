@@ -3,6 +3,7 @@ package com.ziano.kotlinandroid.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.DisplayMetrics
 import com.ziano.jsonholderandroid.ZianoApplication
 
 /**
@@ -26,6 +27,18 @@ class DeviceUtil {
                 networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
                 else -> false
             }
+        }
+
+        fun getScreenWidth(): Int {
+            val displayMetrics = ZianoApplication.instance().applicationContext.resources.displayMetrics
+            return displayMetrics.widthPixels
+
+        }
+
+        fun getScreenHeight(): Int {
+            val displayMetrics = ZianoApplication.instance().applicationContext.resources.displayMetrics
+            return displayMetrics.widthPixels
+
         }
     }
 }

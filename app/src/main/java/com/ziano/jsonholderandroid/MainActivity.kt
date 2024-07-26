@@ -1,6 +1,9 @@
 package com.ziano.jsonholderandroid
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
@@ -12,11 +15,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.ziano.jsonholderandroid.compose.JsonHolderAndroidNavGraph
 import com.ziano.jsonholderandroid.compose.ui.screen.navigation.navigateToJsonHolderGroup
 import com.ziano.jsonholderandroid.ui.theme.JsonHolderAndroidTheme
+import com.ziano.kotlinandroid.jsonholder.ui.JsonHolderMainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,6 +36,12 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    companion object {
+        fun jump(context: Context) {
+            context.startActivity(Intent(context, JsonHolderMainActivity::class.java))
+        }
+    }
 }
 
 @Composable
@@ -41,23 +52,31 @@ fun MyApp() {
 
 @Composable
 fun HomeScreen(navController: NavController) {
+
+    val context = LocalContext.current
+
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxWidth()
         ) {
-            Button(onClick = {
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
                 navController.navigateToJsonHolderGroup()
             }) {
-                Text("JsonHolderMain")
+                Text("Jetpack Compose")
             }
 
-            Text(
-                "Todo: " +
-                        "1.NetRequest, add logic to handle whether the reqeust use cache \n" +
-                        "2.PostDetail appbar scroll animation"
-            )
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    context.startActivity(Intent(context, JsonHolderMainActivity::class.java))
+                }) {
+                Text("Activity + Fragment")
+            }
+
         }
 
     }
