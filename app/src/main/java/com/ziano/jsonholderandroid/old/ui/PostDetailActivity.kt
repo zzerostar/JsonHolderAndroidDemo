@@ -1,6 +1,7 @@
 package com.ziano.kotlinandroid.jsonholder.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -74,6 +75,9 @@ class PostDetailActivity : BaseBindingActivity<PostDetailViewModel, ActivityPost
                 when (state) {
                     is State.Success -> {
                         commentRecyclerAdapter.submitList(state.data)
+                        mViewBinding.apply {
+                            layoutCommentLabel.visibility = View.VISIBLE
+                        }
                     }
 
                     is State.Error -> {}

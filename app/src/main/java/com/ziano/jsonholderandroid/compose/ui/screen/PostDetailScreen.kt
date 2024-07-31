@@ -1,17 +1,20 @@
 package com.ziano.jsonholderandroid.compose.ui.screen
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -32,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import com.ziano.jsonholderandroid.compose.base.ViewStatus
 import com.ziano.jsonholderandroid.common.data.model.Comment
 import com.ziano.jsonholderandroid.common.data.model.Post
+import com.ziano.jsonholderandroid.compose.theme.AppColors
 import com.ziano.jsonholderandroid.compose.vm.PostDetailViewModel
 import com.ziano.jsonholderandroid.compose.widget.CustomFullScreenLoading
 import com.ziano.jsonholderandroid.compose.theme.LightGray
@@ -63,7 +67,6 @@ fun PostDetailScreen(postDetailViewModel: PostDetailViewModel) {
 fun Content(post: Post, comments: List<Comment> = mutableListOf()) {
     val toolbarHeight = 148.dp
     val toolbarHeightPx = with(LocalDensity.current) { toolbarHeight.roundToPx().toFloat() }
-    val toolbarOffsetHeightPx = remember { mutableStateOf(0f) }
 
     val offset = remember {
         mutableStateOf(0f)
@@ -71,7 +74,7 @@ fun Content(post: Post, comments: List<Comment> = mutableListOf()) {
     val nestedScrollConnection = remember {
         object : NestedScrollConnection {
             override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
-                var newOffset = (offset.value) + available.y
+                val newOffset = (offset.value) + available.y
                 offset.value = newOffset.coerceIn(-toolbarHeightPx, 0f)
                 return Offset.Zero
             }
@@ -94,6 +97,22 @@ fun Content(post: Post, comments: List<Comment> = mutableListOf()) {
 
         // our list with build in nested scroll support that will notify us about its scroll
         LazyColumn(contentPadding = PaddingValues(top = toolbarHeight)) {
+
+            if (comments.size > 0) {
+                item {
+                    Column {
+                        Spacer(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(12.dp)
+                                .background(color = AppColors.Divider)
+                        )
+                        Text(text = "Comments:", fontSize = 20.sp, modifier = Modifier.padding(start = 16.dp, top = 12.dp, bottom = 12.dp))
+                    }
+                }
+
+            }
+
             items(comments.size) { index ->
                 val comment = comments[index]
                 Column {
@@ -114,7 +133,7 @@ fun Content(post: Post, comments: List<Comment> = mutableListOf()) {
 
 @Composable
 fun Header(post: Post, modifier: Modifier) {
-    Column(modifier = modifier.background(Color.Blue)) {
+    Column(modifier = modifier) {
         Column(Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
             Text(text = "ID:${post.id}", fontSize = 18.sp, fontWeight = FontWeight.Bold)
             Spacer(Modifier.height(10.dp))

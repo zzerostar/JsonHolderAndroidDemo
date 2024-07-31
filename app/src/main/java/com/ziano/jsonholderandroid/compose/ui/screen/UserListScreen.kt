@@ -25,7 +25,7 @@ import com.ziano.jsonholderandroid.common.data.model.User
 import com.ziano.jsonholderandroid.compose.base.ViewStatus
 import com.ziano.jsonholderandroid.compose.vm.UserListViewModel
 import com.ziano.jsonholderandroid.compose.widget.CustomFullScreenLoading
-import com.ziano.jsonholderandroid.compose.theme.Colors
+import com.ziano.jsonholderandroid.compose.theme.AppColors
 
 /**
  * @author zz
@@ -67,25 +67,25 @@ fun Item(user: User) {
             Row {
                 Icon(painter = painterResource(id = R.drawable.icon_email), contentDescription = "email")
                 Spacer(modifier = Modifier.width(3.dp))
-                Text(text = user.email, fontSize = 16.sp, color = Colors.Black45)
+                Text(text = user.email, fontSize = 16.sp, color = AppColors.Black45)
             }
             Spacer(Modifier.height(3.dp))
             Row {
                 Icon(painter = painterResource(id = R.drawable.icon_phone), contentDescription = "phone")
                 Spacer(modifier = Modifier.width(3.dp))
-                Text(text = user.phone, fontSize = 16.sp, color = Colors.Black45)
+                Text(text = user.phone, fontSize = 16.sp, color = AppColors.Black45)
             }
             Spacer(Modifier.height(3.dp))
             Row {
                 Icon(painter = painterResource(id = R.drawable.icon_address), contentDescription = "address")
                 Spacer(modifier = Modifier.width(3.dp))
-                Text(text = "${user.address.street} ${user.address.suite} ${user.address.city} ", fontSize = 16.sp, color = Colors.Black45)
+                Text(text = "${user.address.street} ${user.address.suite} ${user.address.city} ", fontSize = 16.sp, color = AppColors.Black45)
             }
             Spacer(Modifier.height(3.dp))
             Row {
                 Icon(painter = painterResource(id = R.drawable.icon_company), contentDescription = "company")
                 Spacer(modifier = Modifier.width(3.dp))
-                Text(text = user.company.name, fontSize = 16.sp, color = Colors.Black45)
+                Text(text = user.company.name, fontSize = 16.sp, color = AppColors.Black45)
             }
 
         }

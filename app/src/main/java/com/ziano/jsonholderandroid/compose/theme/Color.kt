@@ -15,10 +15,12 @@ val Purple500 = Color(0xFF6200EE)
 val LightGray = Color(0xFF999999)
 
 
-class Colors {
+
+class AppColors {
 
     companion object {
         val Black45 = Color(0x73000000)
+        val Divider = Color(0x80BEBEBE)
 
     }
 }
