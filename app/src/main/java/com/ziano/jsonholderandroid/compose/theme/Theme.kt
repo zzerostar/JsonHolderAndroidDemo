@@ -1,4 +1,4 @@
-package com.ziano.jsonholderandroid.ui.theme
+package com.ziano.jsonholderandroid.compose.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -53,5 +53,6 @@ fun JsonHolderAndroidTheme(
         colorScheme = colorScheme,
         typography = Typography,
         content = content
+
     )
 }

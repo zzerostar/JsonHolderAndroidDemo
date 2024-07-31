@@ -12,12 +12,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.ziano.jsonholderandroid.compose.ui.screen.navigation.BottomNavItem
+import com.ziano.jsonholderandroid.compose.theme.Purple500
 import com.ziano.jsonholderandroid.compose.ui.JsonHolderNavGraph
+import com.ziano.jsonholderandroid.compose.ui.screen.navigation.BottomNavItem
 
 /**
  * @author zz
@@ -34,6 +37,7 @@ fun JsonHolderMainScreen(navController: NavHostController) {
         JsonHolderMainBottomBar(navController = bottomNavController)
     }) { innerPadding ->
 
+
         JsonHolderNavGraph(bottomNavController, navController, modifier = Modifier.padding(innerPadding))
     }
 }
@@ -45,22 +49,24 @@ fun JsonHolderMainBottomBar(
 ) {
 
     NavigationBar(
-        modifier = modifier,
+        containerColor = Color.White
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
-        BottomNavItem.values().forEachIndexed { index, screen ->
+        BottomNavItem.values().forEachIndexed { index, item ->
             NavigationBarItem(
                 label = {
-                    Text(text = screen.label)
+                    Text(text = item.label, fontWeight = FontWeight.Bold)
                 },
                 icon = {
-                    Icon(imageVector = screen.icon, contentDescription = "")
+
+                    Icon(painter = painterResource(id = item.iconId), contentDescription = "")
+
                 },
-                selected = currentRoute == screen.route,
+                selected = currentRoute == item.route,
                 onClick = {
-                    navController.navigate(screen.route) {
+                    navController.navigate(item.route) {
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }
@@ -69,7 +75,7 @@ fun JsonHolderMainBottomBar(
                     }
                 },
                 colors = NavigationBarItemDefaults.colors(
-                    unselectedTextColor = Color.Gray, selectedTextColor = Color.Black, selectedIconColor = Color.Black, unselectedIconColor = Color.Black, indicatorColor = Color.White
+                    unselectedTextColor = Color.Gray, selectedTextColor = Purple500, selectedIconColor = Purple500, unselectedIconColor = Color.Gray, indicatorColor = Color.White
                 ),
             )
         }

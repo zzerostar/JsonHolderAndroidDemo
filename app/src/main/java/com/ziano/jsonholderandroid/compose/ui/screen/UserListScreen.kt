@@ -24,7 +24,7 @@ import com.ziano.jsonholderandroid.common.data.model.User
 import com.ziano.jsonholderandroid.compose.base.ViewStatus
 import com.ziano.jsonholderandroid.compose.vm.UserListViewModel
 import com.ziano.jsonholderandroid.compose.widget.CustomFullScreenLoading
-import com.ziano.jsonholderandroid.ui.theme.Colors
+import com.ziano.jsonholderandroid.compose.theme.Colors
 
 /**
  * @author zz

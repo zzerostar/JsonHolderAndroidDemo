@@ -34,7 +34,7 @@ import com.ziano.jsonholderandroid.common.data.model.Comment
 import com.ziano.jsonholderandroid.common.data.model.Post
 import com.ziano.jsonholderandroid.compose.vm.PostDetailViewModel
 import com.ziano.jsonholderandroid.compose.widget.CustomFullScreenLoading
-import com.ziano.jsonholderandroid.ui.theme.LightGray
+import com.ziano.jsonholderandroid.compose.theme.LightGray
 import com.ziano.jsonholderandroid.compose.widget.CustomLoading
 import kotlin.math.roundToInt
 
@@ -71,7 +71,7 @@ fun Content(post: Post, comments: List<Comment> = mutableListOf()) {
     val nestedScrollConnection = remember {
         object : NestedScrollConnection {
             override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
-                var newOffset = (offset.value) + (0.5f) * available.y
+                var newOffset = (offset.value) + available.y
                 offset.value = newOffset.coerceIn(-toolbarHeightPx, 0f)
                 return Offset.Zero
             }

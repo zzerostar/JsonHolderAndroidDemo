@@ -1,4 +1,4 @@
-package com.ziano.jsonholderandroid.ui.theme
+package com.ziano.jsonholderandroid.compose.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
