@@ -1,6 +1,5 @@
 package com.ziano.jsonholderandroid.compose.ui.screen.navigation
 
-import androidx.compose.material3.Text
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -15,8 +14,8 @@ import com.ziano.jsonholderandroid.compose.ui.screen.UserListScreen
 
 const val userListScreenRoute = "UserListScreen"
 
-fun NavGraphBuilder.userListScreen() {
+fun NavGraphBuilder.userListScreen(backToHome : () -> Unit) {
     composable(userListScreenRoute) {
-        UserListScreen(viewModel = hiltViewModel())
+        UserListScreen(viewModel = hiltViewModel(), backToHome)
     }
 }

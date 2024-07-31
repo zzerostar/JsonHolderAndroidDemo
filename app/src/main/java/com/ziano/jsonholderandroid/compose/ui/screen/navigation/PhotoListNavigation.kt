@@ -14,8 +14,8 @@ import com.ziano.jsonholderandroid.compose.ui.screen.PhotoListScreen
 
 const val photoListScreenRoute = "PhotoListScreen"
 
-fun NavGraphBuilder.photoListScreen() {
+fun NavGraphBuilder.photoListScreen(backToHome : () -> Unit) {
     composable(photoListScreenRoute) {
-        PhotoListScreen(viewModel = hiltViewModel())
+        PhotoListScreen(viewModel = hiltViewModel(), backToHome)
     }
 }

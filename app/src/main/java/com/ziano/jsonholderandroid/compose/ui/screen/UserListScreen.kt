@@ -1,5 +1,6 @@
 package com.ziano.jsonholderandroid.compose.ui.screen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -33,7 +34,11 @@ import com.ziano.jsonholderandroid.compose.theme.Colors
  * @desc
  */
 @Composable
-fun UserListScreen(viewModel: UserListViewModel) {
+fun UserListScreen(viewModel: UserListViewModel, backToHome : () -> Unit) {
+
+    BackHandler {
+        backToHome()
+    }
 
     val state = viewModel.uiState.collectAsState().value
 

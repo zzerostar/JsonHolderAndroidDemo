@@ -1,7 +1,7 @@
 package com.ziano.jsonholderandroid.compose.ui.screen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -27,11 +27,15 @@ import com.ziano.jsonholderandroid.compose.widget.CustomLoading
  * @desc
  */
 @Composable
-fun PhotoListScreen(viewModel: PhotoListViewModel) {
+fun PhotoListScreen(viewModel: PhotoListViewModel, backToHome : () -> Unit) {
 
     val state = viewModel.uiState.collectAsState().value
 
     val lazyGridState = rememberLazyGridState()
+
+    BackHandler {
+        backToHome()
+    }
 
     when (state.status) {
         ViewStatus.loading -> {

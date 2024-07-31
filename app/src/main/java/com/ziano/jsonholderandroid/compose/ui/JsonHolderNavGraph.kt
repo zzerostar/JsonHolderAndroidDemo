@@ -24,7 +24,12 @@ fun JsonHolderNavGraph(bottomNavController: NavHostController, navController: Na
         postListScreen() {
             navController.navigateToPostDetail(it)
         }
-        photoListScreen()
-        userListScreen()
+        photoListScreen({
+            navController.popBackStack()
+        })
+        userListScreen({
+            navController.popBackStack()
+
+        })
     }
 }
