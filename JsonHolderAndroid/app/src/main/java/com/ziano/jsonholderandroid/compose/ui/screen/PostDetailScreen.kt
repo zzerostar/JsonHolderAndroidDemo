@@ -56,7 +56,6 @@ fun PostDetailScreen(postDetailViewModel: PostDetailViewModel) {
     Scaffold {
         when (state.status) {
             ViewStatus.loading -> CustomFullScreenLoading()
-
             ViewStatus.success -> Content(state.detail!!, state.comments)
             ViewStatus.error -> Text("error")
         }
@@ -107,7 +106,7 @@ fun Content(post: Post, comments: List<Comment> = mutableListOf()) {
                                 .height(12.dp)
                                 .background(color = AppColors.Divider)
                         )
-                        Text(text = "Comments:", fontSize = 20.sp, modifier = Modifier.padding(start = 16.dp, top = 12.dp, bottom = 12.dp))
+                        Text(text = "Comments:", fontSize = 20.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(start = 16.dp, top = 12.dp, bottom = 12.dp))
                     }
                 }
 
