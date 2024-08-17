@@ -11,6 +11,6 @@ MVVM + Coroutine + Flow + Dagger Hilt + Retrofit + Room
 Dio + RiverPod
 
 ***
-###Implementation of Basic Features in an Android App: Data Fetching, Caching, Infinite Scroll Loading, and Pull-to-Refresh
+### Implementation of Basic Features in an Android App: Data Fetching, Caching, Infinite Scroll Loading, and Pull-to-Refresh
 
 This project implements essential features in an Android app, including data fetching, caching, infinite scroll loading, and pull-to-refresh functionality. The network data is retrieved from the open API source [JSONPlaceholder](https://jsonplaceholder.typicode.com/).
