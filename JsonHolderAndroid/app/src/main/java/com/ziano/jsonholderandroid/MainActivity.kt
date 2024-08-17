@@ -23,11 +23,13 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.ziano.jsonholderandroid.common.FlutterConstants
 import com.ziano.jsonholderandroid.compose.JsonHolderAndroidNavGraph
 import com.ziano.jsonholderandroid.compose.ui.screen.navigation.navigateToJsonHolderGroup
 import com.ziano.jsonholderandroid.compose.theme.JsonHolderAndroidTheme
 import com.ziano.kotlinandroid.jsonholder.ui.JsonHolderMainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import io.flutter.embedding.android.FlutterActivity
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -66,20 +68,23 @@ fun HomeScreen(navController: NavController) {
                 .padding(innerPadding)
                 .fillMaxWidth()
         ) {
-            Button(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = {
+            Button(modifier = Modifier.fillMaxWidth(), onClick = {
                 navController.navigateToJsonHolderGroup()
             }) {
                 Text("Jetpack Compose")
             }
 
-            Button(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = {
-                    context.startActivity(Intent(context, JsonHolderMainActivity::class.java))
-                }) {
+            Button(modifier = Modifier.fillMaxWidth(), onClick = {
+                context.startActivity(Intent(context, JsonHolderMainActivity::class.java))
+            }) {
                 Text("Activity + Fragment")
+            }
+
+            Button(modifier = Modifier.fillMaxWidth(), onClick = {
+
+                context.startActivity(FlutterActivity.withCachedEngine(FlutterConstants.JSON_HOLDER_ENGINE_ID).build(context))
+            }) {
+                Text("Flutter")
             }
 
         }
