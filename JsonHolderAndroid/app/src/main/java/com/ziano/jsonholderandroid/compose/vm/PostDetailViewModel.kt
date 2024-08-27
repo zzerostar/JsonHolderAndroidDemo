@@ -36,7 +36,7 @@ class PostDetailViewModel @Inject constructor(savedStateHandle: SavedStateHandle
                     getPostComments(id)
                     currentState.copy(status = ViewStatus.success, detail = response.data)
                 } else {
-                    currentState.copy(status = ViewStatus.error, errorMsg = "")
+                    currentState.copy(status = ViewStatus.error, errorMsg = (response as NetResponse.Failed).errorMsg)
                 }
 
             }.collect {

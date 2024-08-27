@@ -26,42 +26,41 @@ import org.junit.jupiter.api.Assertions
  * @date 2024/8/26
  * @desc
  */
-@OptIn(ExperimentalCoroutinesApi::class)
 class PhotoListViewModelTest {
-
-    lateinit var photoRepository: PhotoRepository
-
-    private lateinit var viewModel: PhotoListViewModel
 
     lateinit var dispatcher: TestDispatcher
 
     lateinit var mockPhotos: MutableList<Photo>
 
+    val MOCK_ALUBM_ID = 1
+
     @Before
     fun setUp() {
-        photoRepository = mockk<PhotoRepository>()
-        generateMockData()
-        dispatcher = StandardTestDispatcher()
-        viewModel = PhotoListViewModel(photoRepository, ioDispatcher = dispatcher)
-    }
-
-    fun generateMockData() {
         mockPhotos = mutableListOf<Photo>()
-
         repeat(20) {
             mockPhotos.add(mockk<Photo>())
         }
-        coEvery { photoRepository.getPhotoList(1) } returns flowOf(NetResponse.Success<List<Photo>>(mockPhotos))
+        dispatcher = StandardTestDispatcher()
     }
 
     @Test
-    fun testGetPhotosSuccessAndStateChangeToSuccess() = runTest{
+    fun testInitAndGetPhotoList() = runTest {
+        val photoRepository = mockk<PhotoRepository>()
+        coEvery { photoRepository.getPhotoList(MOCK_ALUBM_ID) } returns flowOf(NetResponse.Success<List<Photo>>(mockPhotos))
 
-        viewModel.getPhotos()
-
+        PhotoListViewModel(photoRepository, dispatcher)
         dispatcher.scheduler.advanceUntilIdle()
 
-        coVerify { photoRepository.getPhotoList(1) }
+        coVerify { photoRepository.getPhotoList(MOCK_ALUBM_ID) }
+    }
+
+    @Test
+    fun testGetPhotosSuccessAndStateChangeToSuccess() = runTest {
+        val photoRepository = mockk<PhotoRepository>()
+        coEvery { photoRepository.getPhotoList(MOCK_ALUBM_ID) } returns flowOf(NetResponse.Success<List<Photo>>(mockPhotos))
+
+        val viewModel = PhotoListViewModel(photoRepository, dispatcher)
+        dispatcher.scheduler.advanceUntilIdle()
 
         val expectedState = PhotoListViewState(status = ViewStatus.success, data = mockPhotos)
         Assertions.assertEquals(expectedState.status, viewModel.uiState.value.status)
@@ -71,22 +70,19 @@ class PhotoListViewModelTest {
 
     @Test
     fun testGetPhotosFailedAndStateChangeToError() = runTest {
+        val photoRepository = mockk<PhotoRepository>()
         val errorMsg = "Test fail error msg"
         coEvery { photoRepository.getPhotoList(1) } returns flowOf(NetResponse.Failed(errorMsg))
 
-        viewModel.getPhotos()
+        val viewModel = PhotoListViewModel(photoRepository, dispatcher)
         dispatcher.scheduler.advanceUntilIdle()
-
-        coVerify { photoRepository.getPhotoList(1) }
 
         val expectedState = PhotoListViewState(status = ViewStatus.error, errorMsg = errorMsg)
         Assertions.assertEquals(expectedState.status, viewModel.uiState.value.status)
         Assertions.assertEquals(expectedState.errorMsg, viewModel.uiState.value.errorMsg)
-
     }
 
     @After
     fun tearDown() {
-        Dispatchers.resetMain()
     }
 }
