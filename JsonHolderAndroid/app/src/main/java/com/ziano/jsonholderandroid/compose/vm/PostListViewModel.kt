@@ -53,18 +53,16 @@ class PostListViewModel @Inject constructor(
     fun getPostList() {
         val isAppending = _startIndex > 0
 
-        viewModelScope.launch(ioDispatcherContext) {
-
-            if (isAppending) {
-                setState {
-                    currentState.copy(ListViewStatus.appending)
-                }
-            } else {
-                setState {
-                    currentState.copy(ListViewStatus.refreshing)
-                }
+        if (isAppending) {
+            setState {
+                currentState.copy(ListViewStatus.appending)
             }
-
+        } else {
+            setState {
+                currentState.copy(ListViewStatus.refreshing)
+            }
+        }
+        viewModelScope.launch(ioDispatcherContext) {
             postRepository.getPostList(_startIndex).map {
                 currentState.fromNetResponse(it, isAppending)
             }.collect {

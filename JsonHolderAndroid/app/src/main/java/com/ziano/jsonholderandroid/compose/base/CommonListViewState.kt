@@ -17,7 +17,11 @@ abstract class CommonListViewState<T, S : CommonListViewState<T, S>>(
 
     fun fromNetResponse(netResponse: NetResponse<List<T>>, loadMore: Boolean = false): S = when (netResponse) {
         is NetResponse.Failed -> {
-            copyImpl(ListViewStatus.error, errorMsg = netResponse.errorMsg)
+            if(loadMore) {
+                copyImpl(ListViewStatus.success, data)
+            } else {
+                copyImpl(ListViewStatus.error, errorMsg = netResponse.errorMsg)
+            }
         }
 
         is NetResponse.Success -> {
