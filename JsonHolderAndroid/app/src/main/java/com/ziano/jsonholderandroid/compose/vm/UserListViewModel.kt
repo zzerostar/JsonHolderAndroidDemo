@@ -8,6 +8,7 @@ import com.ziano.jsonholderandroid.compose.base.CommonViewState
 import com.ziano.jsonholderandroid.compose.base.IViewIntent
 import com.ziano.jsonholderandroid.compose.base.ViewStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,7 +21,10 @@ import javax.inject.Inject
  * @desc
  */
 @HiltViewModel
-class UserListViewModel @Inject constructor(val userRepository: UserRepository) : BaseViewModel<UserListViewState, UserListViewIntent>() {
+class UserListViewModel @Inject constructor(
+    val userRepository: UserRepository,
+    ioDispatcher: CoroutineDispatcher
+) : BaseViewModel<UserListViewState, UserListViewIntent>(ioDispatcher) {
     override fun initState(): UserListViewState = UserListViewState()
 
     override fun handleIntent(intent: UserListViewIntent) {

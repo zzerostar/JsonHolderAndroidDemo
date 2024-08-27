@@ -1,13 +1,14 @@
 package com.ziano.jsonholderandroid.compose.vm
 
 import androidx.lifecycle.viewModelScope
+import com.ziano.jsonholderandroid.common.data.model.Post
+import com.ziano.jsonholderandroid.common.data.repositroy.PostRepository
 import com.ziano.jsonholderandroid.compose.base.BaseViewModel
 import com.ziano.jsonholderandroid.compose.base.CommonListViewState
 import com.ziano.jsonholderandroid.compose.base.IViewIntent
 import com.ziano.jsonholderandroid.compose.base.ListViewStatus
-import com.ziano.jsonholderandroid.common.data.model.Post
-import com.ziano.jsonholderandroid.common.data.repositroy.PostRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,7 +20,10 @@ import javax.inject.Inject
  * @desc
  */
 @HiltViewModel
-class PostListViewModel @Inject constructor(val postRepository: PostRepository) : BaseViewModel<PostListViewState, PostListViewIntent>() {
+class PostListViewModel @Inject constructor(
+    val postRepository: PostRepository,
+    ioDispatcher: CoroutineDispatcher
+) : BaseViewModel<PostListViewState, PostListViewIntent>(ioDispatcher) {
 
     override fun initState(): PostListViewState = PostListViewState(ListViewStatus.refreshing)
 

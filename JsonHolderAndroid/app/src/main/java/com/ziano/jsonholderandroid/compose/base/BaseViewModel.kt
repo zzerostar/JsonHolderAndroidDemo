@@ -3,8 +3,8 @@ package com.ziano.jsonholderandroid.compose.base
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -18,12 +18,12 @@ import kotlinx.coroutines.launch
  * @date 2024/5/28
  * @desc
  */
-abstract class BaseViewModel<State : IViewState, Intent : IViewIntent> : ViewModel() {
+abstract class BaseViewModel<State : IViewState, Intent : IViewIntent>(protected val ioDispatcher: CoroutineDispatcher) : ViewModel() {
 
-    private val initialState : State by lazy { initState() }
+    private val initialState: State by lazy { initState() }
     abstract fun initState(): State
 
-    val currentState : State get() = uiState.value
+    val currentState: State get() = uiState.value
 
     private val _uiState = MutableStateFlow<State>(initialState)
     val uiState = _uiState.asStateFlow()
@@ -31,7 +31,7 @@ abstract class BaseViewModel<State : IViewState, Intent : IViewIntent> : ViewMod
     private val _uiIntent = MutableSharedFlow<Intent>()
     val uiIntent = _uiIntent.asSharedFlow()
 
-    protected fun setState(block : State.() -> State) {
+    protected fun setState(block: State.() -> State) {
         _uiState.update(block)
     }
 
@@ -54,5 +54,5 @@ abstract class BaseViewModel<State : IViewState, Intent : IViewIntent> : ViewMod
         }
     }
 
-    protected val ioDispatcherContext = exceptionHandler + Dispatchers.IO
+    protected var ioDispatcherContext = exceptionHandler + ioDispatcher
 }

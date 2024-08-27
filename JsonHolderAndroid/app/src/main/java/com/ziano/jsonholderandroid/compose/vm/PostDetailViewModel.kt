@@ -2,12 +2,13 @@ package com.ziano.jsonholderandroid.compose.vm
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.ziano.jsonholderandroid.common.data.model.NetResponse
+import com.ziano.jsonholderandroid.common.data.repositroy.PostRepository
 import com.ziano.jsonholderandroid.compose.base.BaseViewModel
 import com.ziano.jsonholderandroid.compose.base.IViewIntent
 import com.ziano.jsonholderandroid.compose.base.ViewStatus
-import com.ziano.jsonholderandroid.common.data.model.NetResponse
-import com.ziano.jsonholderandroid.common.data.repositroy.PostRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,7 +20,8 @@ import javax.inject.Inject
  * @desc
  */
 @HiltViewModel
-class PostDetailViewModel @Inject constructor(savedStateHandle: SavedStateHandle, val postRepository: PostRepository) : BaseViewModel<PostDetailViewState, PostDetailIntent>() {
+class PostDetailViewModel @Inject constructor(savedStateHandle: SavedStateHandle, val postRepository: PostRepository, ioDispatcher: CoroutineDispatcher) :
+    BaseViewModel<PostDetailViewState, PostDetailIntent>(ioDispatcher) {
 
     init {
         val postId = savedStateHandle.get<Int>("postId") ?: 0

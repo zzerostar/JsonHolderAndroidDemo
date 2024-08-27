@@ -1,13 +1,14 @@
 package com.ziano.jsonholderandroid.compose.vm
 
 import androidx.lifecycle.viewModelScope
+import com.ziano.jsonholderandroid.common.data.model.Photo
+import com.ziano.jsonholderandroid.common.data.repositroy.PhotoRepository
 import com.ziano.jsonholderandroid.compose.base.BaseViewModel
 import com.ziano.jsonholderandroid.compose.base.CommonViewState
 import com.ziano.jsonholderandroid.compose.base.IViewIntent
 import com.ziano.jsonholderandroid.compose.base.ViewStatus
-import com.ziano.jsonholderandroid.common.data.model.Photo
-import com.ziano.jsonholderandroid.common.data.repositroy.PhotoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,7 +21,11 @@ import javax.inject.Inject
  */
 
 @HiltViewModel
-class PhotoListViewModel @Inject constructor(val photoRepository: PhotoRepository) : BaseViewModel<PhotoListViewState, PhotoViewIntent>() {
+class PhotoListViewModel @Inject constructor(
+    val photoRepository: PhotoRepository,
+    ioDispatcher: CoroutineDispatcher
+) : BaseViewModel<PhotoListViewState, PhotoViewIntent>
+    (ioDispatcher) {
     init {
         getPhotos()
     }
