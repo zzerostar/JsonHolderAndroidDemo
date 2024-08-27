@@ -2,7 +2,8 @@
 ### An Android project, three ways to implement the basic features in Android
 
 ## Jetpack Compose
-Jetpack Compose + Navigation + MVI + Coroutine + Flow + Dagger Hilt + Retrofit + Room
+Jetpack Compose + Navigation + MVI + Coroutine + Flow + Dagger Hilt + Retrofit + Room  
+(Added unit test for ViewModels) Junit4 + mockk 
 
 ## Activity + Fragment  
 MVVM + Coroutine + Flow + Dagger Hilt + Retrofit + Room
